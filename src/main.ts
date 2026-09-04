@@ -26,8 +26,8 @@ async function bootstrap() {
   // Swagger setup
   const swaggerPath = `${apiPrefix}/docs`;
   const config = new DocumentBuilder()
-    .setTitle('Aimalya API')
-    .setDescription('The Aimalya API documentation')
+    .setTitle('ReviewIQ API')
+    .setDescription('The ReviewIQ Backend API documentation')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -36,6 +36,11 @@ async function bootstrap() {
     swaggerOptions: {
       persistAuthorization: true,
     },
+  });
+
+  const expressApp = app.getHttpAdapter().getInstance();
+  expressApp.get('/', (req: any, res: any) => {
+    res.json({ status: 'ReviewIQ main backend is running' });
   });
 
   const displayPort = port || 3000;
