@@ -15,6 +15,7 @@ model UserBusiness {
   created_at        String
   updated_at        String
 
+  @@unique([user_id, place_id])
   @@map("user_businesses")
 }
 
@@ -111,6 +112,7 @@ model ActionableRecommendation {
   updated_at String
   read_at    String?
 
+  @@unique([user_id, title_key])
   @@map("actionable_recommendations")
 }
 
