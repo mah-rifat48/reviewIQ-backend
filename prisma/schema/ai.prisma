@@ -128,18 +128,20 @@ model LlmCache {
 }
 
 model RouteHit {
-  id        Int    @id @default(autoincrement())
-  route     String
-  hit_count Int    @default(0)
-  last_hit  String
+  user_id     String
+  route_path  String
+  hit_count   Int     @default(0)
+  last_hit_at String?
 
+  @@id([user_id, route_path])
   @@map("route_hits")
 }
 
 model RouteHitEvent {
-  id     Int    @id @default(autoincrement())
-  route  String
-  hit_at String
+  id         Int    @id @default(autoincrement())
+  user_id    String
+  route_path String
+  created_at String
 
   @@map("route_hit_events")
 }
