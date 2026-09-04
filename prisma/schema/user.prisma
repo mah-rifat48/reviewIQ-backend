@@ -1,0 +1,46 @@
+model User {
+  userId               String                @id @default(uuid())
+  email                String                @unique
+  password             String
+  name                 String
+  role                 Role                  @default(USER)
+  status               Status                @default(ACTIVE)
+  updatedAt            DateTime              @updatedAt
+  createAt             DateTime              @default(now())
+  googleAuth           Boolean               @default(false)
+  language             String?
+  profileImage         String?
+  operationsRole       String?
+  phone                String?
+  address              String?
+  country              String?
+  otp                  Int?
+  isVerified           Boolean               @default(false)
+  refreshToken         String?
+  resetToken           String?
+  resetTokenExpires    DateTime?
+  cardInfo             CardInfo?
+  notifications        Notification[]
+  notificationSettings NotificationSettings?
+  reviews              Review[]
+  subscriptions        Subscription[]
+  supportTickets       SupportTicket[]       @relation("SupportTicketUsers")
+
+  @@index([operationsRole])
+  @@index([name])
+  @@index([googleAuth])
+}
+
+model NotificationSettings {
+  notificationSettingsId String   @id @default(cuid())
+  userId                 String   @unique
+  emailMonthlyReports    Boolean  @default(false)
+  emailImportantAlerts   Boolean  @default(false)
+  emailWeeklySummary     Boolean  @default(false)
+  inAppNegativeReview    Boolean  @default(false)
+  inAppRatingDrop        Boolean  @default(false)
+  inAppMonthlyReport     Boolean  @default(false)
+  updatedAt              DateTime @updatedAt
+  createAt               DateTime @default(now())
+  user                   User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}

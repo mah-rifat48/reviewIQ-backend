@@ -1,0 +1,19 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum Status {
+  ACTIVE
+  SUSPEND
+}

@@ -1,0 +1,17 @@
+{
+    email sakib@example.com
+}
+
+aimaliya.sakibalhasa.xyz {
+    reverse_proxy server:3000
+
+    # Serve uploads directly via Caddy
+    handle_path /uploads/* {
+        root * /usr/src/app/uploads
+        file_server
+    }
+
+    log {
+        output file /var/log/caddy/access.log
+    }
+}

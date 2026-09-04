@@ -1,0 +1,23 @@
+model StarterPlan {
+  id          String   @id @default(uuid())
+  review      Int      @default(100)
+  location    Int      @default(10)
+  balance     Float    @default(0.0)
+  business    Int      @default(1)
+  reportPlan  String[]
+  competitor  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ProfessionalPlan {
+  id          String   @id @default(uuid())
+  review      Int      @default(1000)
+  location    Int      @default(100)
+  balance     Float    @default(100.0)
+  business    Int      @default(1)
+  reportPlan  String[]
+  competitor  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

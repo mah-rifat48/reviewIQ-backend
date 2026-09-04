@@ -1,0 +1,40 @@
+model Subscription {
+  subscriptionId  String           @id @default(uuid())
+  plan            SubscriptionPlan @default(NONE)
+  review          String?
+  location        String?
+  business        String?
+  balance         Float            @default(0.0)
+  durationsPlan   DurationsPlan    @default(MONTHLY)
+  durationDate    DateTime
+  userId          String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  paymentStatus   PaymentStatus    @default(PENDING)
+  stripeSessionId String?          @unique
+  competitor      Boolean          @default(false)
+  reportPlan      String[]
+  user            User             @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@index([plan])
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum SubscriptionPlan {
+  NONE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum DurationsPlan {
+  NONE
+  MONTHLY
+  SIX_MONTHS
+  YEARLY
+}

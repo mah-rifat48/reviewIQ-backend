@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test results
+coverage/
+.nyc_output/
+
+# Uploads (user content – never commit)
+uploads/
+uploads-file/
+
+# Prisma
+prisma/migrations/*.sql.bak
+
+# Misc
+*.tsbuildinfo

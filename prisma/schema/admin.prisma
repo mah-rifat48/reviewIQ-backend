@@ -1,0 +1,16 @@
+model Admin {
+  adminId      String    @id @default(uuid())
+  email        String    @unique
+  password     String
+  name         String
+  role         AdminRole @default(ADMIN)
+  profileImage String?
+  refreshToken String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+enum AdminRole {
+  ADMIN
+  SUPER_ADMIN
+}

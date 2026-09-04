@@ -1,0 +1,13 @@
+model Review {
+  reviewId    String   @id @default(uuid())
+  rating      Int
+  content     String
+  designation String?
+  company     String?
+  userId      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@index([userId])
+}

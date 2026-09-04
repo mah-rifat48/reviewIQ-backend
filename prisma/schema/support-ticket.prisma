@@ -1,0 +1,36 @@
+model SupportTicket {
+  supportTicketId String                @id @default(uuid())
+  status          SupportTicketStatus   @default(OPEN)
+  priority        SupportTicketPriority @default(MEDIUM)
+  category        SupportTicketCategory
+  subject         String
+  description     String
+  property        String?
+  feedback        String?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  users           User[]                @relation("SupportTicketUsers")
+
+  @@index([status])
+  @@index([priority])
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum SupportTicketPriority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum SupportTicketCategory {
+  GENERAL_QUESTION
+  INTEGRATION_ISSUE
+  BILLING_AND_PAYMENT_ISSUE
+  FEATURE_REQUEST
+  TECHNICAL_PROBLEM
+}
