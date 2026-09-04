@@ -1,0 +1,143 @@
+model UserBusiness {
+  id                Int      @id @default(autoincrement())
+  user_id           String
+  context_id        Int
+  business_name     String
+  business_category String?
+  phone_no          String?
+  website           String?
+  business_address  String?
+  input_address     String?
+  place_id          String
+  place_payload     String
+  raw_input         String
+  account_status    String   @default("active")
+  created_at        String
+  updated_at        String
+
+  @@map("user_businesses")
+}
+
+model BusinessContext {
+  id                   Int     @id @default(autoincrement())
+  user_id              String?
+  primary_place_id     String
+  place_ids            String
+  competitor_place_ids String
+  business_name        String?
+  business_address     String?
+  business_category    String?
+  report_frequency     String?
+  goals                String
+  raw_input            String
+  created_at           String
+
+  @@map("business_contexts")
+}
+
+model Place {
+  place_id                        String  @id
+  name                            String?
+  business_status                 String?
+  types                           String?
+  formatted_address               String?
+  rating                          Float?
+  user_ratings_total              Int?
+  price_level                     Int?
+  opening_hours_open_now          Int?
+  opening_hours_weekday_text      String?
+  formatted_phone_number          String?
+  international_phone_number      String?
+  website                         String?
+  geometry_location_lat           Float?
+  geometry_location_lng           Float?
+  geometry_viewport_ne_lat        Float?
+  geometry_viewport_ne_lng        Float?
+  geometry_viewport_sw_lat        Float?
+  geometry_viewport_sw_lng        Float?
+  wheelchair_accessible_entrance Int?
+  serves_vegetarian_food          Int?
+  takeout                         Int?
+  dine_in                         Int?
+  delivery                        Int?
+  updated_at                      String?
+
+  @@map("places")
+}
+
+model Photo {
+  id                Int     @id @default(autoincrement())
+  place_id          String
+  height            Int?
+  width             Int?
+  photo_reference   String? @unique
+  html_attributions String?
+
+  @@map("photos")
+}
+
+model GooglePlaceReview {
+  id                        Int     @id @default(autoincrement())
+  place_id                  String
+  author_name               String?
+  rating                    Int?
+  text                      String?
+  time                      BigInt?
+  relative_time_description String?
+  language                  String?
+  review_hash               String? @unique
+
+  @@map("reviews")
+}
+
+model PlaceRatingSnapshot {
+  id                 Int    @id @default(autoincrement())
+  place_id           String
+  rating             Float?
+  user_ratings_total Int?
+  recorded_at        String
+
+  @@map("place_rating_snapshots")
+}
+
+model ActionableRecommendation {
+  id         Int     @id @default(autoincrement())
+  user_id    String
+  title      String
+  title_key  String
+  status     String  @default("unread")
+  payload    String
+  created_at String
+  updated_at String
+  read_at    String?
+
+  @@map("actionable_recommendations")
+}
+
+model LlmCache {
+  cache_key      String @id
+  kind           String
+  model          String
+  prompt_version String
+  payload        String
+  created_at     String
+
+  @@map("llm_cache")
+}
+
+model RouteHit {
+  id        Int    @id @default(autoincrement())
+  route     String
+  hit_count Int    @default(0)
+  last_hit  String
+
+  @@map("route_hits")
+}
+
+model RouteHitEvent {
+  id     Int    @id @default(autoincrement())
+  route  String
+  hit_at String
+
+  @@map("route_hit_events")
+}
